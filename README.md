@@ -71,7 +71,7 @@ graph TD
 ## Dual-Memory Architecture
 A true agentic system requires memory. MedAgent AI implements a production-grade dual-memory architecture:
 *   **Long-Term Shared Memory (Stateful):** Instead of relying on a fragile LLM context window to remember patient data over weeks, the Swarm uses an external SQLite database as Long-Term Memory. The Intake agent writes a prescription to memory, and a week later, the Monitor agent reads from it.
-*   **Short-Term Conversational Memory:** The ReAct Chat Assistant uses traditional Conversation History Arrays to maintain context, allowing users to ask complex follow-up questions seamlessly.
+*  **Short-Term Conversational Memory:** The ReAct Chat Assistant uses traditional Conversation History Arrays to maintain context, allowing users to ask complex follow-up questions seamlessly.
 
 ## Key Features
 - **Multi-Patient Dashboard:** Designed for care coordinators. The "Risk Dashboard" automatically surfaces the highest-risk patients to the top.
