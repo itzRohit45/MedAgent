@@ -10,6 +10,51 @@ Medication non-adherence is a massive problem in healthcare, costing billions of
 ## The Agentic Swarm Architecture
 This platform moves beyond basic LLM chatbots by employing multiple specialized, autonomous agents that collaborate in the background to form a cohesive Swarm:
 
+```mermaid
+graph TD
+    %% Define Styles
+    classDef user fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
+    classDef frontend fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
+    classDef agent fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:#fff
+    classDef db fill:#f1c40f,stroke:#f39c12,stroke-width:2px,color:#333
+    classDef external fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#fff
+
+    %% Nodes
+    User([Nurse / Caregiver]):::user
+    UI[React / Vite Dashboard]:::frontend
+    
+    subgraph Agentic Swarm [Backend: FastAPI + Google Gemini]
+        Chat[ReAct Chat Agent]:::agent
+        Intake[Prescription Intake Agent]:::agent
+        Scheduler[Schedule Optimization Agent]:::agent
+        Risk[Risk Analytics Agent]:::agent
+        Monitor[Background Monitor Agent]:::agent
+        Safety[FDA Safety Agent]:::agent
+    end
+
+    DB[(SQLite Long-Term Memory)]:::db
+    FDA[FDA External API]:::external
+    Email[Gmail SMTP Relay]:::external
+
+    %% Connections
+    User <-->|Views & Interacts| UI
+    UI <-->|REST API| Chat
+    UI <-->|Uploads Prescriptions| Intake
+    UI <-->|Views Analytics| Risk
+
+    Chat <-->|Queries| DB
+    Intake -->|Writes structured data| DB
+    Scheduler <-->|Reads/Writes schedules| DB
+    Risk <-->|Analyzes adherence| DB
+    Monitor <-->|Scans continuously| DB
+
+    Safety <-->|Checks interactions| FDA
+    Safety -->|Updates| Scheduler
+
+    Monitor -->|Triggers Alert| Email
+    Email -->|Sends Emergency Escalation| User
+```
+
 1. **Intake Agent:** Parses messy, unstructured prescription text (or images), normalizes drug names, extracts exact dosages, and structures the data autonomously into the database.
 2. **Safety Agent:** Instantly cross-references external FDA databases in the background to ensure newly added medications do not cause deadly interactions with a patient's existing regimen.
 3. **Scheduler Agent:** Dynamically builds a perfect 24/7 daily schedule, interpreting complex medical shorthand (e.g., converting "Take at bedtime" to exactly 9:00 PM).
