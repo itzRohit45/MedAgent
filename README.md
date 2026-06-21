@@ -1,13 +1,13 @@
-# 🏥 MedAgent AI: Autonomous Remote Patient Monitoring (RPM) Dashboard
+# MedAgent AI: Autonomous Remote Patient Monitoring (RPM) Dashboard
 
 **A Google + Kaggle 5-Day Course Capstone Project**
 
-## 📖 Project Overview
+## Project Overview
 Medication non-adherence is a massive problem in healthcare, costing billions of dollars and leading to severe patient complications. Traditional reminder apps rely heavily on manual data entry and assume the patient will faithfully log their adherence. 
 
 **MedAgent AI** solves this by introducing an **Agentic AI Swarm architecture**. It is designed as a **Remote Patient Monitoring (RPM) Dashboard** for nurses and care coordinators. Instead of forcing a human nurse to manually call dozens of different patients every day to check if they took their pills, MedAgent AI autonomously monitors all patients simultaneously. It handles complex prescription structuring, schedule generation, safety checks, and emergency caregiver escalations—all without human intervention.
 
-## 🤖 The Agentic Swarm Architecture
+## The Agentic Swarm Architecture
 This platform moves beyond basic LLM chatbots by employing multiple specialized, autonomous agents that collaborate in the background to form a cohesive Swarm:
 
 1. **Intake Agent:** Parses messy, unstructured prescription text (or images), normalizes drug names, extracts exact dosages, and structures the data autonomously into the database.
@@ -17,18 +17,18 @@ This platform moves beyond basic LLM chatbots by employing multiple specialized,
 5. **Analytics Agent:** Constantly monitors patient compliance ("Takes" vs "Skips") to calculate a live Adherence Grade and an overall Clinical Risk Score.
 6. **Monitor Agent:** The true autonomous watchdog. It runs silently on a background schedule. If a patient misses a critical medication (e.g., a blood thinner) or logs a severe side effect, the AI reasons about the risk level. If the risk is high, it bypasses the patient and autonomously dispatches an emergency **Caregiver Alert** via Email to the registered family member or doctor.
 
-## 🧠 Dual-Memory Architecture
+## Dual-Memory Architecture
 A true agentic system requires memory. MedAgent AI implements a production-grade dual-memory architecture:
 *   **Long-Term Shared Memory (Stateful):** Instead of relying on a fragile LLM context window to remember patient data over weeks, the Swarm uses an external SQLite database as Long-Term Memory. The Intake agent writes a prescription to memory, and a week later, the Monitor agent reads from it.
 *   **Short-Term Conversational Memory:** The ReAct Chat Assistant uses traditional Conversation History Arrays to maintain context, allowing users to ask complex follow-up questions seamlessly.
 
-## 🚀 Key Features
+## Key Features
 - **Multi-Patient Dashboard:** Designed for care coordinators. The "Risk Dashboard" automatically surfaces the highest-risk patients to the top.
 - **Autonomous Emergency Escalation:** Real-time email dispatch to caregivers if a critical dose is missed.
 - **ReAct Chat Assistant:** A conversational agent that has direct access to the live SQLite database and external FDA endpoints, capable of answering queries like *"What are Jane's adherence grades and does her medication cause nausea?"*
 - **Live Tooltips & Modern UI:** A beautiful, responsive React frontend.
 
-## 📸 Visual Tour
+## Visual Tour
 
 ### 1. The Multi-Patient Risk Dashboard
 ![Patient Risk Dashboard](docs/risk-dashboard.png)
@@ -54,13 +54,13 @@ A true agentic system requires memory. MedAgent AI implements a production-grade
 ![Emergency Email Alert](docs/email-alert.png)
 > *When a critical medication is missed, the Caregiver Agent autonomously dispatches an emergency email with a clinical summary to the registered emergency contact.*
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **AI Models:** Google Gemini Flash Lite (for fast, cost-effective reasoning) and Gemini Pro.
 - **Backend:** Python, FastAPI, SQLite (Live database tools for the AI).
 - **Frontend:** React, TypeScript, Vite.
 - **Notification Routing:** SMTP Email Gateways.
 
-## 🚀 Local Installation & Quick Start
+## Local Installation & Quick Start
 
 ### 1. Clone the Repository
 ```bash
@@ -86,7 +86,7 @@ npm install
 npm run dev
 ```
 
-## ☁️ Deployment Instructions
+## Deployment Instructions
 
 For production deployment, we recommend a split-tier architecture:
 
