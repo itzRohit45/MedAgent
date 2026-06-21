@@ -56,11 +56,17 @@ graph TD
 ```
 
 1. **Intake Agent:** Parses messy, unstructured prescription text (or images), normalizes drug names, extracts exact dosages, and structures the data autonomously into the database.
+   * *Example: A nurse pastes "Amoxicillin 500mg PO TID x10 days". The agent extracts the drug, route, frequency, and duration, converting "TID" into exactly 3 doses per day.*
 2. **Safety Agent:** Instantly cross-references external FDA databases in the background to ensure newly added medications do not cause deadly interactions with a patient's existing regimen.
-3. **Scheduler Agent:** Dynamically builds a perfect 24/7 daily schedule, interpreting complex medical shorthand (e.g., converting "Take at bedtime" to exactly 9:00 PM).
-4. **Side-Effect Agent (RAG):** When a patient logs a symptom (e.g., "Dizziness"), this agent autonomously retrieves the FDA label via a Retrieval-Augmented Generation pipeline to flag if a specific drug is causing the symptom.
-5. **Analytics Agent:** Constantly monitors patient compliance ("Takes" vs "Skips") to calculate a live Adherence Grade and an overall Clinical Risk Score.
-6. **Monitor Agent:** The true autonomous watchdog. It runs silently on a background schedule. If a patient misses a critical medication (e.g., a blood thinner) or logs a severe side effect, the AI reasons about the risk level. If the risk is high, it bypasses the patient and autonomously dispatches an emergency **Caregiver Alert** via Email to the registered family member or doctor.
+   * *Example: If a patient is on Warfarin, and Ibuprofen is added, the agent flags an extreme bleeding risk and halts the schedule generation until physician override.*
+3. **Scheduler Agent:** Dynamically builds a perfect 24/7 daily schedule, interpreting complex medical shorthand.
+   * *Example: Converts "Take at bedtime" and "Take with food" into a precise 9:00 PM and 8:00 AM timeline avoiding drug-drug timing conflicts.*
+4. **Side-Effect Agent (RAG):** When a patient logs a symptom, this agent autonomously retrieves the FDA label via a Retrieval-Augmented Generation pipeline to flag if a specific drug is causing the symptom.
+   * *Example: Patient logs "Dizziness". The agent pulls the FDA API and notes that Losartan commonly causes dizziness upon standing.*
+5. **Analytics Agent:** Constantly monitors patient compliance to calculate a live Adherence Grade and an overall Clinical Risk Score.
+   * *Example: If a patient misses 3 consecutive doses of a critical heart medication, their Clinical Risk Score spikes to "High", pushing them to the top of the dashboard.*
+6. **Monitor Agent:** The true autonomous watchdog. It runs silently on a background schedule. If a patient misses a critical medication or logs a severe side effect, the AI reasons about the risk level and autonomously dispatches an emergency **Caregiver Alert** via Email.
+   * *Example: An elderly patient misses their morning Lisinopril. The agent evaluates the risk as moderate and sends a summary email to their registered daughter.*
 
 ## Dual-Memory Architecture
 A true agentic system requires memory. MedAgent AI implements a production-grade dual-memory architecture:
@@ -98,6 +104,15 @@ A true agentic system requires memory. MedAgent AI implements a production-grade
 ### 6. Autonomous Emergency Escalation (Email Alerts)
 ![Emergency Email Alert](docs/email-alert.png)
 > *When a critical medication is missed, the Caregiver Agent autonomously dispatches an emergency email with a clinical summary to the registered emergency contact.*
+
+## 🎮 Try It Out (For Judges & Evaluators)
+If you are evaluating this project, follow these steps to experience the Agentic Swarm firsthand!
+
+1. **Add a Patient & Prescription:** Go to the "Add Prescription" tab and paste a messy clinical note like: *"Patient John Doe needs Metformin 500mg twice a day with meals."* Watch the Intake Agent structure it instantly.
+2. **Test the Safety Guardrails:** Try adding a drug that interacts dangerously with what the patient is already taking (e.g., Warfarin + Aspirin). See the Safety Agent block it.
+3. **Simulate Adherence:** Go to the "Daily Schedule" and mark a few critical medications as "Skipped".
+4. **View the Escalation:** Check the Risk Dashboard to see the patient's Clinical Risk Score spike to "High". If configured, watch the Monitor Agent fire off an emergency email.
+5. **Query the Swarm:** Go to the "AI Chat" tab and ask: *"Which of my patients are high risk today and what medications did they miss?"* Watch the agent query the SQLite memory and give you a perfect answer.
 
 ## Tech Stack
 - **AI Models:** Google Gemini Flash Lite (for fast, cost-effective reasoning) and Gemini Pro.
