@@ -50,6 +50,10 @@ A true agentic system requires memory. MedAgent AI implements a production-grade
 ![AI Chat Assistant](docs/ai-chat.png)
 > *The chat assistant possesses real-time access to the SQLite database to answer complex medical questions about the patient's routine.*
 
+### 6. Autonomous Emergency Escalation (Email Alerts)
+![Emergency Email Alert](docs/email-alert.png)
+> *When a critical medication is missed, the Caregiver Agent autonomously dispatches an emergency email with a clinical summary to the registered emergency contact.*
+
 ## 🛠️ Tech Stack
 - **AI Models:** Google Gemini Flash Lite (for fast, cost-effective reasoning) and Gemini Pro.
 - **Backend:** Python, FastAPI, SQLite (Live database tools for the AI).
