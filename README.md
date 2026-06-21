@@ -105,8 +105,8 @@ A true agentic system requires memory. MedAgent AI implements a production-grade
 ![Emergency Email Alert](docs/email-alert.png)
 > *When a critical medication is missed, the Caregiver Agent autonomously dispatches an emergency email with a clinical summary to the registered emergency contact.*
 
-## 🎮 Try It Out (For Judges & Evaluators)
-If you are evaluating this project, follow these steps to experience the Agentic Swarm firsthand!
+## 🎮 Try It Out
+Follow these steps to experience the Agentic Swarm firsthand!
 
 1. **Add a Patient & Prescription:** Go to the "Add Prescription" tab and paste a messy clinical note like: *"Patient John Doe needs Metformin 500mg twice a day with meals."* Watch the Intake Agent structure it instantly.
 2. **Test the Safety Guardrails:** Try adding a drug that interacts dangerously with what the patient is already taking (e.g., Warfarin + Aspirin). See the Safety Agent block it.
